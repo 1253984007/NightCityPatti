@@ -1,22 +1,16 @@
 PODS:
-  - AppsFlyerFramework (6.13.2):
-    - AppsFlyerFramework/Main (= 6.13.2)
-  - AppsFlyerFramework/Main (6.13.2)
   - SAMKeychain (1.5.3)
 
 DEPENDENCIES:
-  - AppsFlyerFramework
   - SAMKeychain
 
 SPEC REPOS:
   trunk:
-    - AppsFlyerFramework
     - SAMKeychain
 
 SPEC CHECKSUMS:
-  AppsFlyerFramework: 39efd4d2523ca9e3234805aea0c6b3c3a4a387d1
   SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
 
-PODFILE CHECKSUM: e24889f75c5254765f05f0b30067f24f607c2c24
+PODFILE CHECKSUM: ab79556e468518ec32f14bf7564072d1336f1143
 
 COCOAPODS: 1.15.2

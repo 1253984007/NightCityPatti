@@ -12,6 +12,7 @@ end
 target 'NightCityPatti-mobile' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  pod 'AppsFlyerFramework'
   pod 'SAMKeychain'
   # Pods for Trivia-mobile
 

@@ -142,7 +142,6 @@
 		294D7D7B1D0D667B002CE7B7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		4033CDBF20E493CF00DAA37B /* jsb-adapter */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "jsb-adapter"; path = "../../../jsb-adapter"; sourceTree = "<group>"; };
 		40CEC425212BDAC1004BCE66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		40CEC42C212BDB19004BCE66 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		40CEC42D212BDB36004BCE66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		467AF6042321FBD400770112 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		467AF60D232881B100770112 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -465,7 +464,6 @@
 				A92275391517C094001B78AA /* Sources */,
 				A922753A1517C094001B78AA /* Frameworks */,
 				A922753B1517C094001B78AA /* Resources */,
-				BEE327AD6DDCEDDF9E11289C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -498,7 +496,6 @@
 				English,
 				en,
 				Base,
-				"zh-Hans",
 			);
 			mainGroup = A92275321517C094001B78AA;
 			productRefGroup = A922753E1517C094001B78AA /* Products */;
@@ -611,24 +608,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BEE327AD6DDCEDDF9E11289C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NightCityPatti-mobile/Pods-NightCityPatti-mobile-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NightCityPatti-mobile/Pods-NightCityPatti-mobile-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -683,7 +662,6 @@
 		40CEC42B212BDB03004BCE66 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				40CEC42C212BDB19004BCE66 /* zh-Hans */,
 				40CEC42D212BDB36004BCE66 /* Base */,
 			);
 			name = Localizable.strings;

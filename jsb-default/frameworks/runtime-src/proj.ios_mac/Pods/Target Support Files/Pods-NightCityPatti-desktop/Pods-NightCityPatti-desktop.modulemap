@@ -1,0 +1,6 @@
+framework module Pods_NightCityPatti_desktop {
+  umbrella header "Pods-NightCityPatti-desktop-umbrella.h"
+
+  export *
+  module * { export * }
+}

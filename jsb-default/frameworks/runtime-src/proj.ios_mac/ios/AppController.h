@@ -24,18 +24,14 @@
  THE SOFTWARE.
  ****************************************************************************/
 #import <UIKit/UIKit.h>
-#import <AppsFlyerLib/AppsFlyerLib.h>
 
 @class RootViewController;
 
-@interface AppController : NSObject <UIApplicationDelegate, AppsFlyerLibDelegate>
+@interface AppController : NSObject <UIApplicationDelegate>
 {
 }
 
 @property(nonatomic, readonly) RootViewController* viewController;
-@property(nonatomic, strong) NSString* afStatus;
-
-- (NSString*)getAfStatus;
 
 @end
 

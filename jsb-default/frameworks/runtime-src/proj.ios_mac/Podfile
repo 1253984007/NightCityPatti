@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'TeenPattiNewCard-desktop' do
+target 'NightCityPatti-desktop' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -9,10 +9,9 @@ target 'TeenPattiNewCard-desktop' do
 
 end
 
-target 'TeenPattiNewCard-mobile' do
+target 'NightCityPatti-mobile' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'AppsFlyerFramework'
   pod 'SAMKeychain'
   # Pods for Trivia-mobile
 

@@ -1,6 +1,0 @@
-framework module Pods_TeenPattiNewCard_mobile {
-  umbrella header "Pods-TeenPattiNewCard-mobile-umbrella.h"
-
-  export *
-  module * { export * }
-}

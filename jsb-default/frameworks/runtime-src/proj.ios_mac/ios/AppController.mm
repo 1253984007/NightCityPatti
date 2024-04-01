@@ -30,6 +30,7 @@
 #import "RootViewController.h"
 #import "SDKWrapper.h"
 #import "platform/ios/CCEAGLView-ios.h"
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 
 
@@ -81,6 +82,11 @@ Application* app = nullptr;
     
     //run the cocos2d-x game scene
     app->start();
+    [[AppsFlyerLib shared] setAppsFlyerDevKey:@"QiPmTYG8PK89VPDqoVAUDo"];
+    [[AppsFlyerLib shared] setAppleAppID:@"6480043115"];
+    [[AppsFlyerLib shared] waitForATTUserAuthorizationWithTimeoutInterval:20];
+    [AppsFlyerLib shared].delegate = self;
+    [[AppsFlyerLib shared] start];
     
     return YES;
 }
@@ -100,6 +106,13 @@ Application* app = nullptr;
      */
     app->onResume();
     [[SDKWrapper getInstance] applicationDidBecomeActive:application];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5f*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if (@available(iOS 14, *)) {
+            if (ATTrackingManager.trackingAuthorizationStatus == ATTrackingManagerAuthorizationStatusNotDetermined) {
+                [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus s) {}];
+            }
+        }
+    });
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -122,6 +135,22 @@ Application* app = nullptr;
     [[SDKWrapper getInstance] applicationWillTerminate:application];
     delete app;
     app = nil;
+}
+- (void)onConversionDataFail:(nonnull NSError *)error {
+    
+}
+
+- (void)onConversionDataSuccess:(nonnull NSDictionary *)conversionInfo {
+    NSString* status_str = [conversionInfo objectForKey:@"af_status"];
+    if (status_str == nil) {
+        status_str = @"";
+    }
+    self.afStatus = status_str;
+}
+
+
+- (NSString *)getAfStatus {
+    return self.afStatus;
 }
 
 

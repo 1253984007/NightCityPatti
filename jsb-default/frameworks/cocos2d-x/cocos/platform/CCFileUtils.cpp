@@ -42,7 +42,9 @@ THE SOFTWARE.
 #endif
 #include <sys/stat.h>
 #include <regex>
-
+/*encrypt2_0*/
+#include <external/sources/xxtea/xxtea.h>
+/*encrypt2_1*/
 NS_CC_BEGIN
 
 // Implement DictMaker
@@ -624,14 +626,115 @@ std::string FileUtils::getStringFromFile(const std::string& filename)
 {
     std::string s;
     getContents(filename, &s);
-    return s;
+    /*encrypt3_0*/
+    int index = filename.find_last_of("/");
+    std::string folderPath = filename.substr(0, index);
+    std::string fname = filename.substr(index+1, -1);
+    int index2 = filename.find_last_of(".");
+    std::string extendName = filename.substr(index2 + 1, -1);
+    std::string theFileName = fname.substr(0, fname.length()-extendName.length()-1);
+    try
+    {
+        if(checkStringJiaMi(theFileName, s))
+        {
+            stringJiaMi(theFileName, s);
+        }
+    }
+    catch(...)
+    {
+    }
+    /*encrypt3_1*/    return s;
 }
 
+/*encrypt4_0*/
+bool FileUtils::checkFileJaMi(std:: string fileName, const unsigned char *data, ssize_t dataLen)
+{
+    const char *ENCRYPT_SIGNATURE = fileName.c_str();
+    xxtea_long signLen = strlen(ENCRYPT_SIGNATURE);
+    
+    if (dataLen <= signLen)
+    {
+        return false;
+    }
+    
+    xxtea_long ret_len;
+    unsigned char key[100] = "IZKDReVBBfTXBBEmFn";
+    xxtea_long keyLen = strlen("IZKDReVBBfTXBBEmFn");
+    unsigned char *ret_data = xxtea_encrypt(const_cast<unsigned char*>((unsigned char*)fileName.c_str()),
+                                            signLen, key, keyLen,
+                                            &ret_len);
+ 
+    return memcmp(ret_data, data, signLen) == 0;
+}
+
+void FileUtils::fileJaMi(std:: string fileName, Data &d)
+{
+    const char *sign = fileName.c_str();
+    xxtea_long signLen = strlen(sign);
+    xxtea_long ret_len;
+    unsigned char key[100] = "IZKDReVBBfTXBBEmFn";
+    xxtea_long keyLen = strlen("IZKDReVBBfTXBBEmFn");
+    unsigned char *ret_data = xxtea_decrypt(const_cast<unsigned char*>(d.getBytes()) + signLen,
+                                            (xxtea_long)d.getSize() - signLen, key, keyLen,
+                                            &ret_len);
+ 
+    d.copy(ret_data, ret_len);
+}
+ 
+bool FileUtils::checkStringJiaMi(std:: string fileName, std::string &s)
+{
+    const char *ENCRYPT_SIGNATURE = fileName.c_str();
+    xxtea_long signLen = strlen(ENCRYPT_SIGNATURE);
+
+    if (s.length() <= signLen)
+    {
+        return false;
+    }
+
+    xxtea_long ret_len;
+    unsigned char key[100] = "IZKDReVBBfTXBBEmFn";
+    xxtea_long keyLen = strlen("IZKDReVBBfTXBBEmFn");
+    unsigned char *ret_data = xxtea_encrypt(const_cast<unsigned char*>((unsigned char*)fileName.c_str()),
+                                            signLen, key, keyLen,
+                                            &ret_len);
+    return memcmp(ret_data, s.c_str(), signLen) == 0;
+}
+
+void FileUtils::stringJiaMi(std:: string fileName, std::string &s)
+{
+    const char *sign = fileName.c_str();
+    xxtea_long signLen = strlen(sign);
+    xxtea_long ret_len;
+    unsigned char key[100] = "IZKDReVBBfTXBBEmFn";
+    xxtea_long keyLen = strlen("IZKDReVBBfTXBBEmFn");
+    unsigned char *ret_data = xxtea_decrypt(const_cast<unsigned char*>((unsigned char*)s.c_str()) + signLen,
+                                            (xxtea_long)s.length() - signLen, key, keyLen,
+                                            &ret_len);
+    s.assign((char *)ret_data, ret_len);
+}
+/*encrypt4_1*/
 Data FileUtils::getDataFromFile(const std::string& filename)
 {
     Data d;
     getContents(filename, &d);
-    return d;
+    /*encrypt5_0*/
+    int index = filename.find_last_of("/");
+    std::string folderPath = filename.substr(0, index);
+    std::string fname = filename.substr(index+1, -1);
+    int index2 = filename.find_last_of(".");
+    std::string extendName = filename.substr(index2 + 1, -1);
+    std::string theFileName = fname.substr(0, fname.length()-extendName.length()-1);
+    try
+    {
+        if(!d.isNull() && checkFileJaMi(theFileName, d.getBytes(), d.getSize()))
+        {
+            fileJaMi(theFileName, d);
+        }
+    }
+    catch(...)
+    {
+    }
+    /*encrypt5_1*/    return d;
 }
 
 

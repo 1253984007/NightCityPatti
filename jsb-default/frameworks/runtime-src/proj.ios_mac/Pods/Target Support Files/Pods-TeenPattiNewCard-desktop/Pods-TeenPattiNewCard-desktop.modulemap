@@ -1,0 +1,6 @@
+framework module Pods_TeenPattiNewCard_desktop {
+  umbrella header "Pods-TeenPattiNewCard-desktop-umbrella.h"
+
+  export *
+  module * { export * }
+}

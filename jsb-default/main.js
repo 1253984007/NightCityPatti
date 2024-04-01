@@ -1,4 +1,37 @@
-window.boot = function () {
+(function () {
+    if (typeof window.jsb === 'object') {
+        var hotUpdateSearchPaths = localStorage.getItem('HotUpdateSearchPaths');
+        if (hotUpdateSearchPaths) {
+            var paths = JSON.parse(hotUpdateSearchPaths);
+	    var path = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'remoteAssets/');
+            paths.unshift(path);
+            jsb.fileUtils.setSearchPaths(paths);
+
+            var fileList = [];
+            var storagePath = paths[0] || '';
+            var tempPath = storagePath + '_temp/';
+            var baseOffset = tempPath.length;
+
+            if (jsb.fileUtils.isDirectoryExist(tempPath) && !jsb.fileUtils.isFileExist(tempPath + 'project.manifest.temp')) {
+                jsb.fileUtils.listFilesRecursively(tempPath, fileList);
+                fileList.forEach(srcPath => {
+                    var relativePath = srcPath.substr(baseOffset);
+                    var dstPath = storagePath + relativePath;
+
+                    if (srcPath[srcPath.length] === '/') {
+                        jsb.fileUtils.createDirectory(dstPath);
+                    } else {
+                        if (jsb.fileUtils.isFileExist(dstPath)) {
+                            jsb.fileUtils.removeFile(dstPath);
+                        }
+                        jsb.fileUtils.renameFile(srcPath, dstPath);
+                    }
+                });
+                jsb.fileUtils.removeDirectory(tempPath);
+            }
+        }
+    }
+})();window.boot = function () {
     var settings = window._CCSettings;
     window._CCSettings = undefined;
     var onProgress = null;

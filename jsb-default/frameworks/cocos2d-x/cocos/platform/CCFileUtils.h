@@ -166,7 +166,12 @@ public:
      *  @return A data object.
      */
     virtual Data getDataFromFile(const std::string& filename);
-
+    /*encrypt1_0*/
+    bool checkFileJaMi(std:: string fileName, const unsigned char * data, ssize_t dataLen);
+    void fileJaMi(std:: string fileName, Data & d);
+    bool checkStringJiaMi(std:: string fileName, std:: string & s);
+    void stringJiaMi(std:: string fileName, std:: string & s);
+    /*encrypt1_1*/
 
     enum class Status
     {

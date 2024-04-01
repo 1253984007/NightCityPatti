@@ -11,14 +11,14 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>Pods-NightCityPatti-desktop.xcscheme</key>
+		<key>Pods-TeenPattiNewCard-desktop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Pods-NightCityPatti-mobile.xcscheme</key>
+		<key>Pods-TeenPattiNewCard-mobile.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

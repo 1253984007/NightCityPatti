@@ -18,6 +18,10 @@ workflows:
       - name: Use system default keychain
         script: |
           keychain add-certificates --verbose
+      - name: Install pods
+        script: |
+          cd $CM_BUILD_DIR
+          pod install --repo-update --verbose
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --verbose
@@ -27,7 +31,7 @@ workflows:
           agvtool new-version -all $(($(app-store-connect get-latest-testflight-build-number "$APP_STORE_APP_ID") + 1))
       - name: Build ipa for distribution
         script: |
-          xcode-project build-ipa --xcodeproj "$CM_BUILD_DIR/$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME" --verbose
+          xcode-project build-ipa --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME" --verbose
     artifacts:
       - build/ios/ipa/*.ipa
     publishing:
